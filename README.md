@@ -18,7 +18,7 @@ What it proves, on a schedule, in GitHub's own infrastructure:
 - the zero-configuration path needs no secrets beyond `GITHUB_TOKEN`
 - the full default check set passes on a clean, dependency-free project
 
-The workflow below is deliberately pinned to `v1.8.0` instead of the `@v1`
+The workflow below is deliberately pinned to `v1.8.1` instead of the `@v1`
 major tag. Consumers who want automatic updates should keep `@v1` and let
 Dependabot bump it; the canary wants the opposite property: a fixed,
 reproducible baseline whose drift is visible. The watchdog workflow in

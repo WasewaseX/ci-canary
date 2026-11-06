@@ -30,3 +30,10 @@ def test_fizzbuzz_endpoints():
     assert out[2] == "fizz"
     assert out[4] == "buzz"
     assert out[14] == "fizzbuzz"
+
+
+def test_interleave_keeps_both_tails():
+    from canary import interleave
+
+    assert interleave(["a", "b"], ["1"]) == ["a", "1", "b"]
+    assert interleave([], ["1", "2"]) == ["1", "2"]

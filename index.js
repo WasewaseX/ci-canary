@@ -20,3 +20,10 @@ export function chunk(list, size) {
   }
   return out;
 }
+
+export function tail(list, n) {
+  if (n < 0) {
+    throw new RangeError('n must not be negative');
+  }
+  return list.slice(Math.max(list.length - n, 0));
+}

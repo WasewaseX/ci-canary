@@ -22,3 +22,8 @@ test('chunk splits evenly and keeps the remainder', () => {
 test('chunk rejects a zero size', () => {
   assert.throws(() => chunk([1], 0), RangeError);
 });
+
+test('tail takes the last n items', () => {
+  assert.deepEqual(tail([1, 2, 3, 4], 2), [3, 4]);
+  assert.deepEqual(tail([1], 5), [1]);
+});

@@ -26,3 +26,4 @@ jobs:
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
+      template_ref: v1.8.6

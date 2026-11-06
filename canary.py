@@ -8,7 +8,11 @@ reusable workflow all have honest work to do.
 
 
 def word_count(text: str) -> dict[str, int]:
-    """Count whitespace-separated words, case-folded."""
+    """Count whitespace-separated words, case-folded.
+
+    Words are split on any whitespace run and compared lowercased, so
+    "To be" and "to be" produce the same counts.
+    """
     counts: dict[str, int] = {}
     for word in text.split():
         key = word.lower()

@@ -1,10 +1,10 @@
 {
-	"name": "ci-canary",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-	"description": "Independent consumer canary for WasewaseX/master-ci",
-	"scripts": {
-		"test": "node --test"
-	}
+  "name": "ci-canary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent consumer canary for WasewaseX/master-ci",
+  "scripts": {
+    "test": "node --test"
+  }
 }

@@ -1,0 +1,24 @@
+# The consumer canary: the smallest real use of master-ci from a foreign
+# repository. Both the reusable workflow ref and template_ref are pinned to
+# an exact release tag so the tested baseline is reproducible; the watchdog
+# in master-ci reports how far the pin lags the newest release.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '20 5 * * *' # daily 05:20 UTC, watched by master-ci's integration.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  master:
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.6.0
+    with:
+      template_ref: v1.6.0
+      scorecard_publish: false

@@ -6,13 +6,13 @@ export function slugify(input) {
   return input
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export function chunk(list, size) {
   if (size < 1) {
-    throw new RangeError('size must be at least 1');
+    throw new RangeError("size must be at least 1");
   }
   const out = [];
   for (let i = 0; i < list.length; i += size) {
@@ -23,7 +23,7 @@ export function chunk(list, size) {
 
 export function tail(list, n) {
   if (n < 0) {
-    throw new RangeError('n must not be negative');
+    throw new RangeError("n must not be negative");
   }
   return list.slice(Math.max(list.length - n, 0));
 }

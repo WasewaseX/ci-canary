@@ -27,10 +27,10 @@ reports the lag, so a stale pin is information rather than a silent choice.
 
 ## Layout
 
-| Path | Purpose |
-| --- | --- |
-| `canary.py`, `tests/` | Python module with pytest coverage |
-| `index.js`, `test/` | Node module with `node --test` coverage |
+| Path                       | Purpose                                    |
+| -------------------------- | ------------------------------------------ |
+| `canary.py`, `tests/`      | Python module with pytest coverage         |
+| `index.js`, `test/`        | Node module with `node --test` coverage    |
 | `.github/workflows/ci.yml` | The whole consumer setup: one `uses:` line |
 
 There are no runtime dependencies anywhere. Python installs through

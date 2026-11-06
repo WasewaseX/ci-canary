@@ -13,8 +13,8 @@ What it proves, on a schedule, in GitHub's own infrastructure:
 
 - cross-repository reusable workflow calls resolve and run
 - stack auto-detection picks up Python and Node on a foreign tree
-- the helper fetch is reproducible: both the workflow ref and
-  `template_ref` are pinned to an exact release tag, never a mutable branch
+- the helper fetch is reproducible: the workflow ref, `template_repo` and
+  `template_ref` are all pinned to an exact release tag, never a mutable branch
 - the zero-configuration path needs no secrets beyond `GITHUB_TOKEN`
 - the full default check set passes on a clean, dependency-free project
 

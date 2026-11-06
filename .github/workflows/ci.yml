@@ -20,9 +20,9 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.8.5
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.8.6
     with:
       template_repo: WasewaseX/master-ci
-      # template_ref deliberately unset: since master-ci v1.8.5 an empty
-      # template_ref resolves to the exact commit of the called workflow,
-      # so this canary exercises the zero-config immutable default
+      # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
+      # github.workflow_sha is the caller's commit for cross-repo calls,
+      # so an empty template_ref fails closed with pin instructions

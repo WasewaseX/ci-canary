@@ -23,3 +23,9 @@ test("tail takes the last n items", () => {
   assert.deepEqual(tail([1, 2, 3, 4], 2), [3, 4]);
   assert.deepEqual(tail([1], 5), [1]);
 });
+
+test('clamp keeps values inside bounds', () => {
+  assert.equal(clamp(5, 0, 10), 5);
+  assert.equal(clamp(-1, 0, 10), 0);
+  assert.throws(() => clamp(1, 10, 0), RangeError);
+});

@@ -47,3 +47,13 @@ def interleave(a: list[str], b: list[str]) -> list[str]:
         if i < len(b):
             out.append(b[i])
     return out
+
+
+def running_total(values: list[float]) -> list[float]:
+    """Cumulative sums of a sequence."""
+    out: list[float] = []
+    acc = 0.0
+    for v in values:
+        acc += v
+        out.append(acc)
+    return out

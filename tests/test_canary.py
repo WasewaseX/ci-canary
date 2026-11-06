@@ -37,3 +37,10 @@ def test_interleave_keeps_both_tails():
 
     assert interleave(["a", "b"], ["1"]) == ["a", "1", "b"]
     assert interleave([], ["1", "2"]) == ["1", "2"]
+
+
+def test_running_total_accumulates():
+    from canary import running_total
+
+    assert running_total([1, 2, 3]) == [1.0, 3.0, 6.0]
+    assert running_total([]) == []

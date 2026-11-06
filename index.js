@@ -27,3 +27,10 @@ export function tail(list, n) {
   }
   return list.slice(Math.max(list.length - n, 0));
 }
+
+export function clamp(value, low, high) {
+  if (low > high) {
+    throw new RangeError('low must not exceed high');
+  }
+  return Math.max(low, Math.min(high, value));
+}

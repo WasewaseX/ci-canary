@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { chunk, clamp, slugify, tail } from "../index.js";
+import { average, chunk, clamp, slugify, tail } from "../index.js";
 
 test("slugify collapses separators", () => {
   assert.equal(slugify("  Hello, CI World! "), "hello-ci-world");

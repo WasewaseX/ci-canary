@@ -18,14 +18,14 @@ What it proves, on a schedule, in GitHub's own infrastructure:
 - the zero-configuration path needs no secrets beyond `GITHUB_TOKEN`
 - the full default check set passes on a clean, dependency-free project
 
-The v1.9.1 validation run was the first real execution of the six new
+The v1.9.2 validation run was the first real execution of the six new
 stacks anywhere: Maven verify on JDK 21, CMake + ctest, xunit on .NET 10,
 RSpec 3.13, PHPUnit 11, and a Dockerfile through hadolint, docker build
 and Trivy. The template's hygiene gate caught two genuine fixture
 violations on that push (odd XML padding, a missing include) - the fence
 works on a foreign tree.
 
-The workflow below is deliberately pinned to an exact tag (`v1.9.1`)
+The workflow below is deliberately pinned to an exact tag (`v1.9.2`)
 instead of the `@v1` major tag. Consumers who want automatic updates should
 keep `@v1` and let Dependabot bump it; the canary wants the opposite
 property: a fixed, reproducible baseline whose drift is visible. The

@@ -1,0 +1,17 @@
+{
+    "name": "example/canary-php",
+    "description": "PHP fixture for the master-ci consumer canary",
+    "type": "library",
+    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": "^11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Canary\\": "php-src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

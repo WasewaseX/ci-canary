@@ -1,5 +1,6 @@
 #include "canary_math.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 static int failures = 0;

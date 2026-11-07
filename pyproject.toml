@@ -11,5 +11,10 @@ requires-python = ">=3.10"
 [tool.setuptools]
 py-modules = ["canary"]
 
+# PEP 735: declare the test dependency so imports in tests/ are resolvable
+# to the manifest (the integrity engine's undeclared-import check reads this).
+[dependency-groups]
+test = ["pytest>=8"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

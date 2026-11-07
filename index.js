@@ -34,3 +34,10 @@ export function clamp(value, low, high) {
   }
   return Math.max(low, Math.min(high, value));
 }
+
+export function average(list) {
+  if (list.length === 0) {
+    throw new RangeError("average of an empty list is undefined");
+  }
+  return list.reduce((sum, value) => sum + value, 0) / list.length;
+}

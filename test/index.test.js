@@ -29,3 +29,11 @@ test("clamp keeps values inside bounds", () => {
   assert.equal(clamp(-1, 0, 10), 0);
   assert.throws(() => clamp(1, 10, 0), RangeError);
 });
+
+test("average handles the basic case", () => {
+  assert.equal(average([2, 4, 6]), 4);
+});
+
+test("average rejects an empty list", () => {
+  assert.throws(() => average([]), RangeError);
+});

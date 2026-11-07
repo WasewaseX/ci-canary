@@ -5,35 +5,50 @@ An independent consumer canary for
 
 This repository exists to answer one question from the outside: when a real
 project that nobody develops together with the template calls master-ci as a
-reusable workflow, does everything work? It is a small, dependency-free
-polyglot project (Python + Node) with the one-line consumer setup that the
-template advertises in `examples/ci.yml`.
+reusable workflow, does everything work? It is a small, honest polyglot
+project spanning all ten stacks the template ships, with the one-line
+consumer setup that the template advertises in `examples/ci.yml`.
 
 What it proves, on a schedule, in GitHub's own infrastructure:
 
 - cross-repository reusable workflow calls resolve and run
-- stack auto-detection picks up Python and Node on a foreign tree
+- stack auto-detection picks up every stack it touches on a foreign tree
 - the helper fetch is reproducible: the workflow ref, `template_repo` and
   `template_ref` are all pinned to an exact release tag, never a mutable branch
 - the zero-configuration path needs no secrets beyond `GITHUB_TOKEN`
 - the full default check set passes on a clean, dependency-free project
 
-The workflow below is deliberately pinned to `v1.8.2` instead of the `@v1`
-major tag. Consumers who want automatic updates should keep `@v1` and let
-Dependabot bump it; the canary wants the opposite property: a fixed,
-reproducible baseline whose drift is visible. The watchdog workflow in
-master-ci reads this pin, compares it against the newest released tag, and
-reports the lag, so a stale pin is information rather than a silent choice.
+The v1.9.0 validation run was the first real execution of the six new
+stacks anywhere: Maven verify on JDK 21, CMake + ctest, xunit on .NET 10,
+RSpec 3.13, PHPUnit 11, and a Dockerfile through hadolint, docker build
+and Trivy. The template's hygiene gate caught two genuine fixture
+violations on that push (odd XML padding, a missing include) - the fence
+works on a foreign tree.
+
+The workflow below is deliberately pinned to an exact tag (`v1.9.0`)
+instead of the `@v1` major tag. Consumers who want automatic updates should
+keep `@v1` and let Dependabot bump it; the canary wants the opposite
+property: a fixed, reproducible baseline whose drift is visible. The
+watchdog workflow in master-ci reads this pin, compares it against the
+newest released tag, and reports the lag, so a stale pin is information
+rather than a silent choice.
 
 ## Layout
 
-| Path                       | Purpose                                    |
-| -------------------------- | ------------------------------------------ |
-| `canary.py`, `tests/`      | Python module with pytest coverage         |
-| `index.js`, `test/`        | Node module with `node --test` coverage    |
-| `.github/workflows/ci.yml` | The whole consumer setup: one `uses:` line |
+| Path                        | Purpose                                         |
+| --------------------------- | ----------------------------------------------- |
+| `canary.py`, `tests/`       | Python module with pytest coverage              |
+| `index.js`, `test/`         | Node module with `node --test` coverage         |
+| `pom.xml`, `src/`           | JVM fixture: Maven verify, JUnit 5 on JDK 21    |
+| `CMakeLists.txt`, `cpp/`    | C fixture: CMake build, ctest                   |
+| `Canary.csproj`             | .NET fixture: xunit on the pinned SDK           |
+| `Gemfile`, `lib/`, `spec/`  | Ruby fixture: RSpec                             |
+| `composer.json`, `php-src/` | PHP fixture: PHPUnit 11                         |
+| `Dockerfile`                | Container fixture: hadolint, build, Trivy scan  |
+| `.github/workflows/ci.yml`  | The whole consumer setup: one `uses:` line      |
 
 There are no runtime dependencies anywhere. Python installs through
 `pip install -e .` from a dependency-free `pyproject.toml`, Node tests run
-on the built-in runner from Node 22, so the canary exercises the pipeline
-without ever resolving a package from a registry.
+on the built-in runner from Node 22. The JVM fixture resolves its test
+toolchain through Maven on the first run and caches it; every other stack
+uses toolchains preinstalled on the runner.

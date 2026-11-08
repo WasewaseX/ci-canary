@@ -1,6 +1,6 @@
 """Reference functions for the master-ci consumer canary.
 
-Small on purpose: the canary exercises the CI pipeline, not algorithmic
+Small on purpose: the canary exercises the CI pipeline, not algorithmics
 depth. Every function is pure, documented, and covered by the tests in
 ``tests/`` so the lint, type, dead-code, complexity and test stages of the
 reusable workflow all have honest work to do.

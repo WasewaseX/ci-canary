@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Workspace member exercising master-ci's manifest-aware project discovery",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "test:coverage": "npx --yes c8 --reporter cobertura --all node --test"
   }
 }

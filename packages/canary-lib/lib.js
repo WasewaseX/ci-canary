@@ -16,6 +16,13 @@ export function unique(values) {
   return [...new Set(values)];
 }
 
+export function truncate(input, max) {
+  if (!Number.isInteger(max) || max < 1) {
+    throw new RangeError("max must be a positive integer");
+  }
+  return input.length <= max ? input : `${input.slice(0, max)}...`;
+}
+
 export function chunk(values, size) {
   if (!Number.isInteger(size) || size < 1) {
     throw new RangeError("size must be a positive integer");

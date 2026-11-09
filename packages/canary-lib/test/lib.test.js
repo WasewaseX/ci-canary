@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { chunk, snakeCase, unique } from "../lib.js";
+import { chunk, snakeCase, truncate, unique } from "../lib.js";
 
 test("snakeCase splits camelCase boundaries", () => {
   assert.equal(snakeCase("parseHTTPResponse"), "parse_http_response");
@@ -21,4 +21,16 @@ test("chunk splits even and uneven runs", () => {
 
 test("chunk rejects a non-positive size", () => {
   assert.throws(() => chunk([1], 0), RangeError);
+});
+
+test("truncate keeps short strings intact", () => {
+  assert.equal(truncate("short", 10), "short");
+});
+
+test("truncate cuts and marks long strings", () => {
+  assert.equal(truncate("abcdefgh", 5), "abcde...");
+});
+
+test("truncate rejects a non-positive max", () => {
+  assert.throws(() => truncate("x", 0), RangeError);
 });

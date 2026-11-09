@@ -26,8 +26,8 @@ jobs:
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v1.22.0
-      # v1.22.0: the monorepo map and the new-code ratchet. The root
+      template_ref: v1.22.2
+      # v1.22.2: new-code denominator counts coverage subjects only. The root
       # package.json declares workspaces, so discovery must enumerate
       # packages/canary-lib as its own project. coverage_min 30 gates the
       # uploaded reports, and diff_base turns on the new-code gate: the

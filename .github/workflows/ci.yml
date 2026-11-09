@@ -20,13 +20,13 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.4.1
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.4.2
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.4.1
+      template_ref: v2.4.2
       # v2.2.0: the quality-ratchet release. The committed
       # .quality-baseline.json is the floor: zero findings in every
       # check across all ten stacks, so any future finding of any kind
@@ -58,5 +58,7 @@ jobs:
       # invisible to zizmor - so the hygiene gate failed on every
       # exercise since the hunt shipped. They now sit on the key lines,
       # and the template's own contract test rejects the buried form.
+      # v2.4.2: the rest of the gate chain finally ran against the
+      # hunt code - ruff format and editorconfig fixes rode along.
       coverage_min: 30
       diff_base: origin/main

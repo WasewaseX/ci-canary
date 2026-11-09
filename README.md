@@ -55,3 +55,10 @@ uses toolchains preinstalled on the runner.
 
 The quality ratchet floor (`.quality-baseline.json`) is zero findings
 in every check, verified against master-ci v2.2.0 over all ten stacks.
+
+The flake hunt (`.flaky-baseline.json`, `flaky.yml`) is the v2.3.0
+exercise: `tests/test_flake_demo.py` fails exactly on the hunt's odd
+iterations, so three repetitions see pass/fail/pass and the committed
+quarantine grandfather it - parser, classifier and baseline semantics
+proven on real runners. Routine CI never sets `FLAKE_HUNT_ITERATION`,
+so the demo is an ordinary passing test everywhere else.

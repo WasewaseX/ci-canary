@@ -20,13 +20,13 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.2.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.3.0
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.2.0
+      template_ref: v2.3.0
       # v2.2.0: the quality-ratchet release. The committed
       # .quality-baseline.json is the floor: zero findings in every
       # check across all ten stacks, so any future finding of any kind
@@ -35,5 +35,13 @@ jobs:
       # each change adds need blocking-score 0, cognitive 15 and
       # cyclomatic 15. coverage_min 30 gates the uploaded reports; a
       # floor without a report fails closed.
+      #
+      # v2.3.0: the flake-hunt release. flaky.yml joins this workflow as
+      # a second scheduled consumer call (Mondays 04:00 UTC): it runs
+      # the pytest suite three times, and tests/test_flake_demo.py
+      # fails exactly on odd iterations, so the hunt sees pass/fail/pass
+      # and the committed .flaky-baseline.json quarantines it - proving
+      # parser, classifier and grandfathering end to end on real
+      # runners. A second, unlisted flaky test would fail the hunt.
       coverage_min: 30
       diff_base: origin/main

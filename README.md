@@ -53,3 +53,6 @@ on the built-in runner from Node 22. The JVM fixture resolves its test
 toolchain through Maven on the first run and caches it; every other stack
 uses toolchains preinstalled on the runner.
 # the ratchet floor: zero findings in every check, verified at v2.2.0
+
+The quality ratchet floor (`.quality-baseline.json`) is zero findings
+in every check, verified against master-ci v2.2.0 over all ten stacks.

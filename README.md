@@ -62,3 +62,13 @@ iterations, so three repetitions see pass/fail/pass and the committed
 quarantine grandfather it - parser, classifier and baseline semantics
 proven on real runners. Routine CI never sets `FLAKE_HUNT_ITERATION`,
 so the demo is an ordinary passing test everywhere else.
+
+The quarantine loop is the v2.4.0 exercise: the hunt's copy now
+reports its machine verdict and builds a candidate baseline when new
+flakes appear in enforcement mode, and the `quarantine` job
+re-verifies the candidate against the default branch before opening or
+updating the `ci/flake-quarantine` PR - append-only, bounded by
+`add-paths` to the baseline file, never a push to main. The demo flake
+stays quarantined, so routine hunts report `quarantined-only`: no
+proposal, no PR. A second, unlisted flaky test would fail the hunt and
+produce the evidence-backed PR in the same run.

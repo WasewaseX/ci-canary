@@ -20,13 +20,13 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.3.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.4.0
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.3.0
+      template_ref: v2.4.0
       # v2.2.0: the quality-ratchet release. The committed
       # .quality-baseline.json is the floor: zero findings in every
       # check across all ten stacks, so any future finding of any kind
@@ -43,5 +43,14 @@ jobs:
       # and the committed .flaky-baseline.json quarantines it - proving
       # parser, classifier and grandfathering end to end on real
       # runners. A second, unlisted flaky test would fail the hunt.
+      #
+      # v2.4.0: the quarantine loop. The hunt's copy gains the verdict
+      # output and the proposal step; when the hunt ever fails on a new
+      # flake in enforcement mode (the baseline is committed), the new
+      # quarantine job re-verifies the candidate against the default
+      # branch and opens/updates the ci/flake-quarantine PR - bounded by
+      # add-paths to .flaky-baseline.json, append-only, never a push to
+      # main. The demo flake stays quarantined, so routine runs see
+      # status quarantined-only: no proposal, no PR.
       coverage_min: 30
       diff_base: origin/main

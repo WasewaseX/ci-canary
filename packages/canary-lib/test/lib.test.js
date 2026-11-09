@@ -16,11 +16,7 @@ test("unique keeps first occurrences in order", () => {
 });
 
 test("chunk splits even and uneven runs", () => {
-  assert.deepEqual(chunk([1, 2, 3, 4, 5], 2), [
-    [1, 2],
-    [3, 4],
-    [5],
-  ]);
+  assert.deepEqual(chunk([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]]);
 });
 
 test("chunk rejects a non-positive size", () => {

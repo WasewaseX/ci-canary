@@ -20,18 +20,19 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.22.2
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.0.0
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v1.22.2
-      # v1.22.2: new-code denominator counts coverage subjects only. The root
-      # package.json declares workspaces, so discovery must enumerate
-      # packages/canary-lib as its own project. coverage_min 30 gates the
-      # uploaded reports, and diff_base turns on the new-code gate: the
-      # lines each change adds need blocking-score 0, cognitive 15 and
-      # cyclomatic 15. A floor without a report fails closed.
+      template_ref: v2.0.0
+      # v2.0.0: the dependency-graph release. The root package.json
+      # declares workspaces, so discovery must enumerate packages/canary-lib
+      # as its own project. coverage_min 30 gates the uploaded reports, and
+      # diff_base turns on the new-code gate: the lines each change adds
+      # need blocking-score 0, cognitive 15 and cyclomatic 15. A floor
+      # without a report fails closed. The v2.0 import-cycle scan runs
+      # repo-wide on every push - the canary's ten stacks are its graph.
       coverage_min: 30
       diff_base: origin/main

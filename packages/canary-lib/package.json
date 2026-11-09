@@ -7,5 +7,10 @@
   "scripts": {
     "test": "node --test",
     "test:coverage": "npx --yes c8 --reporter cobertura --all node --test"
-  }
+  },
+  "keywords": [
+    "canary",
+    "ci",
+    "workspace"
+  ]
 }

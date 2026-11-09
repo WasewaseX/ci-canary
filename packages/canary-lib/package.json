@@ -1,0 +1,10 @@
+{
+  "name": "@canary/lib",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Workspace member exercising master-ci's manifest-aware project discovery",
+  "scripts": {
+    "test": "node --test"
+  }
+}

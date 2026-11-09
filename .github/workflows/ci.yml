@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.21.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v1.22.2
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved

@@ -20,21 +20,20 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.1.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.2.0
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.1.0
-      # v2.1.0: the native-dependency release. Unused-dependency oracles
-      # now cover Go, Rust, PHP, C# and Java, and the orphan-module check
-      # walks every module - the canary's ten stacks are the proof that a
-      # real multi-stack tree scans clean (zero findings, grade A).
-      # coverage_min 30 gates the uploaded reports, and diff_base turns
-      # on the new-code gate: the lines each change adds need
-      # blocking-score 0, cognitive 15 and cyclomatic 15. A floor without
-      # a report fails closed. The import-cycle scan runs repo-wide on
-      # every push - the canary's ten stacks are its graph.
+      template_ref: v2.2.0
+      # v2.2.0: the quality-ratchet release. The committed
+      # .quality-baseline.json is the floor: zero findings in every
+      # check across all ten stacks, so any future finding of any kind
+      # blocks the run until it is fixed or a reviewed commit re-records
+      # the floor. The new-code gate stays armed (diff_base): the lines
+      # each change adds need blocking-score 0, cognitive 15 and
+      # cyclomatic 15. coverage_min 30 gates the uploaded reports; a
+      # floor without a report fails closed.
       coverage_min: 30
       diff_base: origin/main

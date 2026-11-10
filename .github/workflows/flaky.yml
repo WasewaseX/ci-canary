@@ -56,7 +56,7 @@ on:
         description: Ref of the master-ci repo to fetch helpers from
         required: false
         type: string
-        default: v2.7.1
+        default: v2.7.2
 
 permissions:
   contents: read

@@ -12,15 +12,21 @@ on:
     - cron: "20 5 * * *" # daily 05:20 UTC, watched by master-ci's integration.yml
   workflow_dispatch:
 
+# Least privilege, zizmor-proof: minimal at the workflow level, the
+# elevated scopes on exactly the jobs that need them (mirroring
+# examples/ci.yml). A workflow-level write next to any job-level block
+# trips the excessive-permissions audit.
 permissions:
   contents: read
-  security-events: write
-  pull-requests: write
-  id-token: write
 
 jobs:
   master:
     uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.7.1
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+      id-token: write   # only for Scorecard publishing inside the template
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved

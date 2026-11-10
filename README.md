@@ -106,3 +106,14 @@ tree already contains the base branch, so the two-dot diff is exactly
 the change under review; both failing still fails closed. This PR
 exercises that fallback on a real runner, with the dashboard row
 ("armed via own workflow") rendered from the caller's checkout.
+
+Template v2.8.0 ("the unblindable gate") closed the audit's four P0
+defects, and this repository now exercises the biggest one hosted: its
+`ci.yml` calls `required-quality.yml` - the caller-level aggregate whose
+gate job is green only when master-ci AND CodeQL both succeeded. Before
+v2.8.0, branch protection requiring `ci-success` alone could never fail
+on a red CodeQL analysis, because CodeQL rode a separate workflow. The
+new-code gate also reports the analysis state of every changed file now
+- parsed, no functions, excluded, unsupported language, parse failure -
+and a parse failure under a requested ceiling is exit 2, never a silent
+pass. This PR is that aggregate's first foreign exercise.

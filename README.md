@@ -118,3 +118,14 @@ file now: parsed, no functions, excluded, unsupported language,
 parse failure - and a parse failure under a requested ceiling is
 exit 2, never a silent pass. This PR is that aggregate's first
 foreign exercise.
+
+Template v2.8.1 ("the name of the check") documents what this
+repository's own hosted runs proved: a job-called reusable workflow
+reports its checks as `<caller job id> / <job id>` - this repo's PR #2
+runs show `required / gate`, `required / master / new-code-gate` and
+`required / codeql / analyze (python)`, because this file names its
+aggregate job `required`. The template README now states that rule
+with this repository as evidence, and names its example caller job
+`required-quality-check` so its documented string is right by
+construction. This exercise bumps every pin to v2.8.1 and re-verifies
+the aggregate against the release tag.

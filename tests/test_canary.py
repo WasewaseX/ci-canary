@@ -20,8 +20,28 @@ def test_clamp_inside_bounds():
 
 
 def test_clamp_rejects_swapped_bounds():
-    with pytest.raises(ValueError):
+    # The message is part of the contract and anchored on purpose: a
+    # mangled or decorated message must not pass the same way a silent
+    # one would. Mutation testing (v2.9.0 exercise) found the gap.
+    with pytest.raises(ValueError, match=r"^low must not exceed high$"):
         clamp(1, 10, 0)
+
+
+def test_clamp_allows_equal_bounds():
+    """A degenerate closed interval is valid: the guard rejects only
+    low > high, so low == high must pass through unchanged."""
+    assert clamp(5, 5, 5) == 5
+
+
+def test_fizzbuzz_full_sequence():
+    """The exact 15-row table pins the range's upper bound as hard as
+    its entries: an off-by-one range must not sneak an extra row past
+    the endpoint checks (mutation testing found exactly that gap)."""
+    assert fizzbuzz(15) == [
+        "1", "2", "fizz", "4", "buzz",
+        "fizz", "7", "8", "fizz", "buzz",
+        "11", "fizz", "13", "14", "fizzbuzz",
+    ]
 
 
 def test_fizzbuzz_endpoints():

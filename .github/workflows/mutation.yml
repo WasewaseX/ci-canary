@@ -1,0 +1,40 @@
+# =============================================================================
+# Mutation Testing - the canary's scheduled proof, called from the template
+# =============================================================================
+# v2.9.0 exercise: mutation.yml is the template's third reusable workflow
+# surface and the first scheduled one that is callable. The caller owns
+# the schedule trigger (a called workflow cannot carry one), so this
+# thin wrapper fires the hunt weekly, one day-step behind the flake hunt
+# (04:00), and dispatches on demand.
+#
+# Opt-in by declaration, verified by the template's Test assurance row:
+# the committed [tool.mutmut] in pyproject.toml is the declaration, and
+# the dashboard greps THIS file for the mutation.yml call before it
+# reports the layer armed. A call without a committed mutation config
+# would report "nothing ran" and pass - the declaration and the call
+# are two halves the template never lets drift.
+#
+# template_ref is pinned to the exact release like every other canary
+# call; template_repo is explicit because a cross-repo call cannot
+# auto-detect the helper repo (GITHUB_WORKFLOW_REF names the caller's
+# workflow there - the codeql.yml contract, v1.8.6 lesson).
+# =============================================================================
+
+name: Mutation Testing
+
+on:
+  schedule:
+    - cron: "40 4 * * 1" # Mondays 04:40 UTC - after the flake hunt
+  workflow_dispatch:
+
+# Least privilege: the mutation job reads the repo, installs the pinned
+# tool and runs the project's own tests. Nothing writes.
+permissions:
+  contents: read
+
+jobs:
+  mutate:
+    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.9.0
+    with:
+      template_repo: WasewaseX/master-ci
+      template_ref: v2.9.0

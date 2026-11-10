@@ -8,6 +8,7 @@ name: CI
 on:
   push:
     branches: [main]
+  pull_request: # exercise the dashboard: it renders only on PR events
   schedule:
     - cron: "20 5 * * *" # daily 05:20 UTC, watched by master-ci's integration.yml
   workflow_dispatch:

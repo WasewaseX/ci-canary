@@ -20,13 +20,13 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.6.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.7.0
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.6.0
+      template_ref: v2.7.0
       # v2.2.0: the quality-ratchet release. The committed
       # .quality-baseline.json is the floor: zero findings in every
       # check across all ten stacks, so any future finding of any kind
@@ -62,3 +62,23 @@ jobs:
       # hunt code - ruff format and editorconfig fixes rode along.
       coverage_min: 30
       diff_base: origin/main
+
+  # v2.7.0: the semantic eye. codeql.yml is the template's second
+  # reusable workflow - free on public repos, deep data-flow security
+  # analysis, SARIF to the Security tab with a per-language category.
+  # Its default is languages: auto (a template-provided detector reads
+  # the committed manifests), but this canary is deliberately polyglot:
+  # auto would fan out to eight autobuild jobs per push. A real
+  # consumer with two manifests gets auto for free; the canary pins one
+  # dialect and the faster security-extended suite, exercising the
+  # explicit-languages path instead. The dashboard's Semantic analysis
+  # row flips to 'armed via own workflow' either way - it is verified
+  # by grepping THIS file for the codeql.yml call below, not declared.
+  codeql:
+    uses: WasewaseX/master-ci/.github/workflows/codeql.yml@v2.7.0
+    with:
+      languages: python
+      queries: security-extended
+    permissions:
+      contents: read
+      security-events: write

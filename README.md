@@ -95,3 +95,14 @@ workflow level, elevated scopes on exactly the jobs that need them - and
 zizmor reports no findings. This branch exists to exercise the one
 surface a push cannot reach: the dashboard's computed
 "Semantic analysis (CodeQL)" row, which renders only on pull requests.
+
+And the exercise earned its keep twice over: the hosted PR run caught a
+genuine template defect no push could have reached - the new-code gate's
+merge-base diff is structurally impossible on a pull_request checkout,
+where the runner fetches the merge ref at depth 1 and neither side
+carries the common history (exit 128 on `origin/main...HEAD`). Template
+v2.7.2 adds a tree-diff fallback in the shared diff: on a merge ref the
+tree already contains the base branch, so the two-dot diff is exactly
+the change under review; both failing still fails closed. This PR
+exercises that fallback on a real runner, with the dashboard row
+("armed via own workflow") rendered from the caller's checkout.

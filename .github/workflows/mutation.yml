@@ -1,7 +1,7 @@
 # =============================================================================
 # Mutation Testing - the canary's scheduled proof, called from the template
 # =============================================================================
-# v2.9.0 exercise: mutation.yml is the template's third reusable workflow
+# v2.9.1 exercise: mutation.yml is the template's third reusable workflow
 # surface and the first scheduled one that is callable. The caller owns
 # the schedule trigger (a called workflow cannot carry one), so this
 # thin wrapper fires the hunt weekly, one day-step behind the flake hunt
@@ -34,7 +34,7 @@ permissions:
 
 jobs:
   mutate:
-    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.9.0
+    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.9.1
     with:
       template_repo: WasewaseX/master-ci
-      template_ref: v2.9.0
+      template_ref: v2.9.1

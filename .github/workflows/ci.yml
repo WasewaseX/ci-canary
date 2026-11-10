@@ -20,13 +20,13 @@ permissions:
 
 jobs:
   master:
-    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.7.0
+    uses: WasewaseX/master-ci/.github/workflows/master-ci.yml@v2.7.1
     with:
       template_repo: WasewaseX/master-ci
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.7.0
+      template_ref: v2.7.1
       # v2.2.0: the quality-ratchet release. The committed
       # .quality-baseline.json is the floor: zero findings in every
       # check across all ten stacks, so any future finding of any kind
@@ -75,7 +75,7 @@ jobs:
   # row flips to 'armed via own workflow' either way - it is verified
   # by grepping THIS file for the codeql.yml call below, not declared.
   codeql:
-    uses: WasewaseX/master-ci/.github/workflows/codeql.yml@v2.7.0
+    uses: WasewaseX/master-ci/.github/workflows/codeql.yml@v2.7.1
     with:
       languages: python
       queries: security-extended

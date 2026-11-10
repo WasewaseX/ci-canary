@@ -113,7 +113,8 @@ defects, and this repository now exercises the biggest one hosted: its
 gate job is green only when master-ci AND CodeQL both succeeded. Before
 v2.8.0, branch protection requiring `ci-success` alone could never fail
 on a red CodeQL analysis, because CodeQL rode a separate workflow. The
-new-code gate also reports the analysis state of every changed file now
-- parsed, no functions, excluded, unsupported language, parse failure -
-and a parse failure under a requested ceiling is exit 2, never a silent
-pass. This PR is that aggregate's first foreign exercise.
+new-code gate also reports the analysis state of every changed
+file now: parsed, no functions, excluded, unsupported language,
+parse failure - and a parse failure under a requested ceiling is
+exit 2, never a silent pass. This PR is that aggregate's first
+foreign exercise.

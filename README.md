@@ -72,3 +72,26 @@ updating the `ci/flake-quarantine` PR - append-only, bounded by
 stays quarantined, so routine hunts report `quarantined-only`: no
 proposal, no PR. A second, unlisted flaky test would fail the hunt and
 produce the evidence-backed PR in the same run.
+
+The v2.7.0 exercise ("the semantic eye") was the first hosted CodeQL run:
+the caller's `ci.yml` calls `codeql.yml` with an explicit
+`languages: python` and `queries: security-extended` - the tree is
+deliberately polyglot, so `auto` would fan out to eight autobuild jobs.
+`codeql / prepare` and `codeql / analyze (python)` both passed, and the
+dashboard row is verified from the caller's files, not declared.
+
+The template's own CI went red on the v2.7.0 push in four independent
+ways; v2.7.1 fixed all four, and the canary inherited one of them
+(shellcheck on the runner now flags the hunt's intentionally-split
+variables). The v2.7.1 exercise mirrors the repairs and moves every pin
+to the exact `v2.7.1` tag.
+
+The follow-up taught a zizmor lesson: while the workflow-level
+`pull-requests` and `id-token` grants were the only permission statement
+in the file, the audit passed them; once the codeql job carried its own
+permissions block, the workflow-level writes became overly broad at high
+confidence. `ci.yml` now scopes per job - `contents: read` at the
+workflow level, elevated scopes on exactly the jobs that need them - and
+zizmor reports no findings. This branch exists to exercise the one
+surface a push cannot reach: the dashboard's computed
+"Semantic analysis (CodeQL)" row, which renders only on pull requests.

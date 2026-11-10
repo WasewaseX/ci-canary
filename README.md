@@ -148,9 +148,8 @@ workflow files, visible in PR #4's dashboard comment.
 
 And the exercise caught a template bug, exactly as designed: PR #4 was
 this repository's first python-stack PR beside a helper checkout, and
-the hosted ruff lint flagged I001 on `_ci/scripts/discover_projects.py`
-- the template's own helpers, judged by this repo's copied default
-config. Template v2.9.1 ("the invisible helpers") makes the transient
+the hosted ruff lint flagged I001 on `_ci/scripts/discover_projects.py`,
+the template's own helpers judged by this repo's copied default config. Template v2.9.1 ("the invisible helpers") makes the transient
 `_ci` checkout invisible to the consumer's python stack (default ruff
 config exclusion, mypy scan exclusion matching what vulture, lizard
 and the mypy file probe already declared). PR #4's re-run went green

@@ -129,3 +129,30 @@ with this repository as evidence, and names its example caller job
 `required-quality-check` so its documented string is right by
 construction. This exercise bumps every pin to v2.8.1 and re-verifies
 the aggregate against the release tag.
+
+Template v2.9.0 ("the callable proof") makes `mutation.yml` the
+template's third reusable workflow and the first scheduled one that is
+callable: this repository adopts it with a thin wrapper owning the
+schedule trigger (Mondays 04:40, one step behind the flake hunt) that
+calls `mutation.yml` with explicit, pinned helper refs, and opts in by
+declaration - `[tool.mutmut]` scoped to `canary.py`. The first run
+earned its keep before it ever went hosted: 70 mutants, 5 survivors,
+all genuine assertion gaps (clamp's guard accepted `low >= high` with
+no equal-bounds test, the ValueError message was unpinned, fizzbuzz's
+range grew by one past the endpoint checks). The strengthened suite -
+anchored message match, equal-bounds pass-through, the full 15-row
+table - kills all 70, and the dashboard's Mutation testing row flips
+to "armed via own workflow - `mutation.yml` calls `mutation.yml`": the
+template's second verified row, proven by a grep of this branch's
+workflow files, visible in PR #4's dashboard comment.
+
+And the exercise caught a template bug, exactly as designed: PR #4 was
+this repository's first python-stack PR beside a helper checkout, and
+the hosted ruff lint flagged I001 on `_ci/scripts/discover_projects.py`
+- the template's own helpers, judged by this repo's copied default
+config. Template v2.9.1 ("the invisible helpers") makes the transient
+`_ci` checkout invisible to the consumer's python stack (default ruff
+config exclusion, mypy scan exclusion matching what vulture, lizard
+and the mypy file probe already declared). PR #4's re-run went green
+on the fixed default, the hosted dispatch of the mutation wrapper
+killed 70/70 mutants on main, and every pin rides v2.9.1.

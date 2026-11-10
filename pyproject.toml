@@ -18,3 +18,11 @@ test = ["pytest>=8"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+# v2.9.0 exercise: the mutation-test opt-in, by declaration. The
+# template's mutation.yml greps for exactly this section; paths are
+# scoped to the pure reference module so every surviving mutant is an
+# honest assertion gap in covered code, not noise from an entry script.
+[tool.mutmut]
+source_paths = ["canary.py"]
+pytest_add_cli_args_test_selection = ["tests"]

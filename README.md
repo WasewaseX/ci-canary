@@ -176,7 +176,7 @@ callee declares never starts, before any step could explain itself;
 the wrapper now grants the scopes on the calling job (the same rule
 `ci.yml` already satisfies for the aggregate), and the committed
 baseline still decides whether the loop ever fires. The second
-dispatch started, ran nine language hunters to their verdicts, and
+dispatch started, ran its eight language hunters to their verdicts, and
 died in `ruby/setup-ruby`: the action fails closed without
 `ruby-version` when the repository commits neither `.ruby-version` nor
 `.tool-versions`, and this tree has a Gemfile with no version file -

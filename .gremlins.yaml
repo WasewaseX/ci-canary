@@ -1,0 +1,11 @@
+# The declaration is the opt-in: template mutation.yml runs
+# `gremlins unleash` when this file is committed at the repo root.
+#
+# Thresholds deliberately declared at 0 = not enforced (gremlins' own
+# default): the run reports test efficacy and mutant coverage without
+# failing. gremlins exits 10/11 only when real floors are declared here
+# and breached - raise them when the Go mutants deserve a hard gate.
+unleash:
+  threshold:
+    efficacy: 0
+    mutant-coverage: 0

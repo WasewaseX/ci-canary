@@ -8,11 +8,15 @@
 # (04:00), and dispatches on demand.
 #
 # Opt-in by declaration, verified by the template's Test assurance row:
-# the committed [tool.mutmut] in pyproject.toml is the declaration, and
-# the dashboard greps THIS file for the mutation.yml call before it
-# reports the layer armed. A call without a committed mutation config
-# would report "nothing ran" and pass - the declaration and the call
-# are two halves the template never lets drift.
+# the committed declarations are [tool.mutmut] in pyproject.toml plus
+# .cargo-mutants.toml and .gremlins.yaml at the repo root, and the
+# dashboard greps THIS file for the mutation.yml call before it reports
+# the layer armed. Since template v2.11 ("the unmuted nets") the
+# declarations are independent: one weekly call mutates the Python,
+# Rust and Go stacks, instead of the old first-match chain letting
+# [tool.mutmut] mute the other two forever. A call without a committed
+# mutation config would report "nothing ran" and pass - the declaration
+# and the call are two halves the template never lets drift.
 #
 # template_ref is pinned to the exact release like every other canary
 # call; template_repo is explicit because a cross-repo call cannot
@@ -34,7 +38,7 @@ permissions:
 
 jobs:
   mutate:
-    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.10.1
+    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.11.0
     with:
       template_repo: WasewaseX/master-ci
-      template_ref: v2.10.1
+      template_ref: v2.11.0

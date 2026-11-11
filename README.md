@@ -155,3 +155,19 @@ config exclusion, mypy scan exclusion matching what vulture, lizard
 and the mypy file probe already declared). PR #4's re-run went green
 on the fixed default, the hosted dispatch of the mutation wrapper
 killed 70/70 mutants on main, and every pin rides v2.9.1.
+
+Template v2.10.0 ("the reusable hunt") completes the trilogy: every
+opt-in surface in the template - CodeQL, mutation testing, the flake
+hunt - is one pinned `uses:` line, nothing copied whole. This
+repository deletes the 472-line `flaky.yml` copy it had carried since
+the v2.3 exercise and adopts the hunt through a thin wrapper that owns
+the schedule trigger (Mondays 04:20, between the template's own 04:00
+hunt and the mutation wrapper at 04:40) and stays read-only on
+purpose: the committed `.flaky-baseline.json` is what arms
+enforcement, the demo flake stays quarantined so routine hunts report
+quarantined-only, and the write scopes matter only when a new flaky
+test should open the `ci/flake-quarantine` PR. The Flake hunt row in
+the Test assurance table is now the template's third verified row -
+like mutation before it, it flips to "armed via own workflow" only
+when the call is really committed to this branch - and every pin
+rides v2.10.0.

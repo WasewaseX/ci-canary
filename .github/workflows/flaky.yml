@@ -4,15 +4,17 @@
 # v2.10.0 exercise: flaky.yml completes the template's reusable trilogy -
 # the last copy-whole surface becomes one pinned uses: line. The 472-line
 # copy this repository carried since the v2.3 exercise is deleted; the
-# caller owns the schedule trigger (a called workflow cannot carry one)
-# and the quarantine loop's write scopes. This wrapper stays read-only on
-# purpose: the committed .flaky-baseline.json arms enforcement (the demo
-# flake stays quarantined, so routine hunts report quarantined-only, no
-# proposal, no PR), and write scopes are only needed when a NEW flaky
-# test should open the ci/flake-quarantine PR. The hunt itself and the
-# quarantine's verify path never need write access - a wrapper that
-# grants nothing adopts the hunt with the exact semantics the template
-# documents, and zizmor keeps its clean report.
+# caller owns the schedule trigger (a called workflow cannot carry one).
+#
+# The write scopes on the calling job are unconditional and this run
+# proved it: the first dispatch (read-only wrapper) died as a
+# startup_failure with zero jobs, because the called workflow's
+# quarantine job declares contents: write and pull-requests: write and a
+# reusable call that grants less never starts. The scopes let the run
+# START; the committed .flaky-baseline.json decides whether the loop
+# ever FIRES - the demo flake stays quarantined, so routine hunts report
+# quarantined-only: no proposal, no PR, no write happens. zizmor stays
+# quiet: the scopes sit on exactly one job, never at the workflow level.
 #
 # template_ref is pinned to the exact release like every other canary
 # call; template_repo is explicit because a cross-repo call cannot
@@ -27,14 +29,18 @@ on:
     - cron: "20 4 * * 1" # Mondays 04:20 UTC - between the template's own hunt and the mutation wrapper
   workflow_dispatch:
 
-# Least privilege: the hunt runs this repository's test suite and reads
-# nothing but the committed baseline. Nothing writes.
 permissions:
   contents: read
 
 jobs:
   hunt:
+    # The scopes the called quarantine job declares must be granted HERE,
+    # on the calling job, or GitHub rejects the call before any job runs.
+    permissions:
+      contents: write
+      pull-requests: write
     uses: WasewaseX/master-ci/.github/workflows/flaky.yml@v2.10.0
     with:
       template_repo: WasewaseX/master-ci
       template_ref: v2.10.0
+

@@ -1,0 +1,9 @@
+# The declaration is the opt-in: template mutation.yml runs
+# `cargo mutants` when this file is committed at the repo root.
+#
+# NOTE the distinction: this file is master-ci's declaration contract;
+# cargo-mutants' own config file, if ever needed, lives at
+# .cargo/mutants.toml (the tool's default path). This crate is tiny and
+# the defaults suffice - one pure function, two exact-assertion tests.
+# Exit contract (verified by the template): 0 = every viable mutant
+# caught, 2 = survivors found, and survivors fail the weekly job.

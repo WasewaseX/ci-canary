@@ -185,3 +185,19 @@ step. Template v2.10.1 ("the call that never starts") writes both laws
 down: the grant rule in the README example and checks.md, the pinned
 `ruby-version: '3.4'` in the hunt's Ruby step, and two contract tests
 so neither can regress. Every pin rides v2.10.1.
+
+Template v2.11.0 ("the unmuted nets") unmutes the other two mutation
+ecosystems. The template's detect step had been a first-match if/elif
+since v2.6: this repository's committed [tool.mutmut] muted Stryker,
+cargo-mutants and gremlins forever, and a ten-stack canary could never
+mutate more than its first-declared stack. The declarations are now
+independent - this branch commits `.cargo-mutants.toml` and
+`.gremlins.yaml` beside the existing `[tool.mutmut]`, so one weekly
+call mutates the Python, Rust and Go stacks in order. The preparation
+also found two detection lies the chain carried since v2.6: `ls` exits
+nonzero when any candidate filename is missing, so a repo committing
+exactly one Stryker config (the common case) was never detected and a
+`.gremlins.yaml`-only declaration was invisible - found by simulating
+the detect block against fixture trees, fixed with honest `-f` tests.
+The gremlins thresholds stay at 0 (not enforced): the first hosted runs
+report the Go stack's efficacy before any floor is declared.

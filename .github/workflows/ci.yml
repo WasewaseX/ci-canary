@@ -34,7 +34,7 @@ jobs:
   # required-quality aggregate' - verified by grepping THIS file for the
   # required-quality.yml call, not declared.
   required:
-    uses: WasewaseX/master-ci/.github/workflows/required-quality.yml@v2.11.3
+    uses: WasewaseX/master-ci/.github/workflows/required-quality.yml@v2.12.0
     permissions:
       contents: read
       security-events: write
@@ -45,7 +45,7 @@ jobs:
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.11.3
+      template_ref: v2.12.0
       # The committed .quality-baseline.json is the floor: zero findings
       # in every check across all ten stacks. The new-code gate stays
       # armed (diff_base): the lines each change adds need blocking-score

@@ -39,7 +39,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: WasewaseX/master-ci/.github/workflows/flaky.yml@v2.13.0
+    uses: WasewaseX/master-ci/.github/workflows/flaky.yml@v2.15.0
     with:
       template_repo: WasewaseX/master-ci
-      template_ref: v2.13.0
+      template_ref: v2.15.0

@@ -38,7 +38,7 @@ permissions:
 
 jobs:
   mutate:
-    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.13.0
+    uses: WasewaseX/master-ci/.github/workflows/mutation.yml@v2.15.0
     with:
       template_repo: WasewaseX/master-ci
-      template_ref: v2.13.0
+      template_ref: v2.15.0

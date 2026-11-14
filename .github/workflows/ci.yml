@@ -34,7 +34,7 @@ jobs:
   # required-quality aggregate' - verified by grepping THIS file for the
   # required-quality.yml call, not declared.
   required:
-    uses: WasewaseX/master-ci/.github/workflows/required-quality.yml@v2.15.0
+    uses: WasewaseX/master-ci/.github/workflows/required-quality.yml@v2.16.0
     permissions:
       contents: read
       security-events: write

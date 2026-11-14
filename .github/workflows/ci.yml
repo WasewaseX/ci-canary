@@ -45,7 +45,7 @@ jobs:
       # a foreign consumer pins the helper ref: master-ci v1.8.6 proved
       # github.workflow_sha is the caller's commit for cross-repo calls,
       # so an empty template_ref fails closed with pin instructions
-      template_ref: v2.15.0
+      template_ref: v2.16.0
       # The committed .quality-baseline.json is the floor: zero findings
       # in every check across all ten stacks. The new-code gate stays
       # armed (diff_base): the lines each change adds need blocking-score
